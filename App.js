@@ -7,34 +7,44 @@
  */
 import 'react-native-gesture-handler';
 
-import React, {Component} from 'react';
+import React, {Component, useState,useEffect } from 'react';
 import {
   SafeAreaView,
   StyleSheet,
   ScrollView,
   Button,
   View,
+  Linking,
   Text,
   Dimensions,
   StatusBar
 } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
+import HomeScreen from './HomeScreen';
 
 
 
 const Stack = createStackNavigator();
+
+/*
 const linking =  {
-  prefixes: ['hilux://'],
+  prefixes: [ 'https://ajm.re',
+              'hilux://'],
   config: {
     AuthPass: 'auth',    
   },
 };
+*/
 
-function HomeScreen({ navigation }) {
+function HomeScr({ navigation }) {
+  
   return (
-    
+    <HomeScreen/>
+  );
 
+  /*
+  return (
           <View style={{ flex:1, backgroundColor:"yellow"}}>
 
             <View style={{ flex:1,  backgroundColor:"red", borderWidth:1, marginTop:10, justifyContent:"center" ,alignItems:"center"}}>
@@ -47,9 +57,8 @@ function HomeScreen({ navigation }) {
               />                    
             </View>                        
           </View>        
-
-
   );
+  */
 }
 
 function ProfileScreen({ navigation }) {
@@ -108,7 +117,7 @@ function AuthFail({ navigation }) {
 function MyStack() {
   return (
     <Stack.Navigator>
-      <Stack.Screen name="Home" component={HomeScreen} />
+      <Stack.Screen name="Home" component={HomeScr} />
       <Stack.Screen name="Notifications" component={NotificationsScreen} />
       <Stack.Screen name="Profile" component={ProfileScreen} />
       <Stack.Screen name="Settings" component={SettingsScreen} />
@@ -120,10 +129,16 @@ function MyStack() {
 
 
 const App= () => {
+
+
+
+
+
+
   return (
     <>
 
-      <NavigationContainer linking={linking} fallback={<Text>Loading...</Text>} >
+      <NavigationContainer fallback={<Text>Loading...</Text>} >
         <StatusBar barStyle="dark-content" />
         <SafeAreaView style={{flex:1}}>
           <MyStack/>
